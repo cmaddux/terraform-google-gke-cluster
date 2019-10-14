@@ -153,12 +153,12 @@ resource "google_container_cluster" "cluster" {
   # The loggingservice that the cluster should write logs to. Using the
   # 'logging.googleapis.com/kubernetes' option makes use of new Stackdriver
   # Kubernetes integration.
-  logging_service = "logging.googleapis.com/kubernetes"
+  logging_service = "${var.stackdriver_logging != "false" ? logging.googleapis.com/kubernetes : }"
 
   # The monitoring service that the cluster should write metrics to. Using the
   # 'monitoring.googleapis.com/kubernetes' option makes use of new Stackdriver
   # Kubernetes integration.
-  monitoring_service = "monitoring.googleapis.com/kubernetes"
+  monitoring_service = "${var.stackdriver_monitoring != "false" ? monitoring.googleapis.com/kubernetes : }"
 
   # Change how long update operations on the cluster are allowed to take
   # before being considered to have failed. The default is 10 mins.
